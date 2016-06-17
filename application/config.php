@@ -15,4 +15,6 @@ return [
     'log'          => [
         'type' => 'trace', // 支持 socket trace file
     ],
+    //是否启用控制器后缀
+    'use_controller_suffix'  => true,
 ];
