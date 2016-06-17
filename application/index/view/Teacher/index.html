@@ -1,2 +1,27 @@
-I am V  nihao!
-{:var_dump($teachers)}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>教师管理</title>
+</head>
+<body>
+	<table>
+		<tr>
+			<th>序号</th>
+			<th>姓名</th>
+			<th>性别</th>
+			<th>用户名</th>
+			<th>邮箱</th>
+		</tr>
+		{volist name="teachers" id="teacher"}
+		<tr>
+			<td>{$key}</td>
+			<td>{$teacher->getData("name")}</td>
+			<td>{eq name='$teacher->getData("sex")' value='0'}男{else /}女{/eq}</td>
+			<td>{$teacher->getData("username")}</td>
+			<td>{$teacher->getData("email")}</td>
+		</tr>
+		{/volist}
+	</table>
+	{:var_dump($teachers)}
+</body>
+</html>
