@@ -45,9 +45,22 @@ class TeacherController extends Controller
 	 */
 	public function insert()
     {
-        var_dump($_POST);//与form中的method对应  $_GET同样是
-        $postData = input('post.');//使用助手函数input
-        var_dump($postData);
+        //接收传入数据
+        $teacher = input('post.');
+        //$teacher['create_time'] = time();   // 加入时间戳
+        //var_dump($teacher);
+        //引用teacher模型
+        $Teacher = new teacher;
+        //var_dump($Teacher);
+
+        //插入数据
+        $Teacher->data($teacher)->save();
+
+        //反馈结果
+        return $teacher['name'].'添加成功';
+        // var_dump($_POST);//与form中的method对应  $_GET同样是
+        // $postData = input('post.');//使用助手函数input
+        // var_dump($postData);
         // return 'hello insert';//测试
         // 新建测试数据
         // $teacher = array();
