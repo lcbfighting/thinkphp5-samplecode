@@ -19,5 +19,8 @@ return [
     'use_controller_suffix'  => true,
 
     //设置变量过滤方法
-    'default_filter'=>'htmlspecialchars',
+    'default_filter' => 'htmlspecialchars',
+
+    // 开启自动写入时间戳字段
+     'auto_timestamp' => true,
 ];
