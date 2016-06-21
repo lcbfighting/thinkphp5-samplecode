@@ -47,17 +47,22 @@ class TeacherController extends Controller
     {
         //接收传入数据
         $teacher = input('post.');
-        //$teacher['create_time'] = time();   // 加入时间戳
+       // $teacher['create_time'] = time();   // 加入时间戳
         //var_dump($teacher);
         //引用teacher模型
         $Teacher = new teacher;
         //var_dump($Teacher);
 
-        //插入数据
-        $Teacher->data($teacher)->save();
+        //加入验证信息
+        $result = $Teacher->validate(true)->data($teacher)->save();
 
         //反馈结果
-        return $teacher['name'].'添加成功';
+        if (false === $result) {
+        	return '新增失败'. $Teacher->getError();
+        } else{
+        	return $teacher['name'].'添加成功';
+        }
+       
         // var_dump($_POST);//与form中的method对应  $_GET同样是
         // $postData = input('post.');//使用助手函数input
         // var_dump($postData);
@@ -88,5 +93,16 @@ class TeacherController extends Controller
         //获取V层数据
         $htmls = $this->fetch();//取回V层数据
         return $htmls;//返回给用户
+    }
+
+    //测试方法
+    public function test()
+    {
+        $data = array();
+        $data['username'] = 'ceshi';
+        $data['name'] = '1';
+        $data['sex'] = '1';
+        $data['email'] = 'hello';
+        var_dump($this->validate($data, 'Teacher'));
     }
 }
