@@ -109,28 +109,33 @@ class TeacherController extends Controller
     //删除方法
     public function delete()
     {
+        //接收ID，并转换为int型
+        $id = input('get.id/d');
+        //var_dump(input('get.'));
         //引入教师表模型
-        $Teacher = new Teacher;
-        //获取当前记录
-        if (false !== $teacher = $Teacher::get(8))
-        {
-            // 删除当前ID的记录
-            if ($state = $teacher->delete())
-            {
-                return '删除成功';
-            }
-        }
-        return '删除失败';
-    
-        // //return 'delete action!';
+        // $Teacher = new Teacher;
+        // //获取当前记录
+        // if (false !== $teacher = $Teacher::get(8))
+        // {
+        //     // 删除当前ID的记录
+        //     if ($state = $teacher->delete())
+        //     {
+        //         return '删除成功';
+        //     }
+        // }
+        // return '删除失败';
+        
         // 直接删除相关关键字记录
-        // $state = Teacher::destroy(3);
-        // var_dump($state);
-        // return '删除成功';
+       
         if($count = Teacher::destroy(6))
         {
-        	return '成功删除' . $count . '条数据';
+        	$message =  '成功删除' . $count . '条数据';
+        }else
+        {
+        	$message =  '删除失败';
         }
-        	return '删除失败';
+
+        //进行跳转
+        return $this->success($message, url('index'));
     }
 }
