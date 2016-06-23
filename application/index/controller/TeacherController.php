@@ -105,4 +105,32 @@ class TeacherController extends Controller
         $data['email'] = 'hello';
         var_dump($this->validate($data, 'Teacher'));
     }
+
+    //删除方法
+    public function delete()
+    {
+        //引入教师表模型
+        $Teacher = new Teacher;
+        //获取当前记录
+        if (false !== $teacher = $Teacher::get(8))
+        {
+            // 删除当前ID的记录
+            if ($state = $teacher->delete())
+            {
+                return '删除成功';
+            }
+        }
+        return '删除失败';
+    
+        // //return 'delete action!';
+        // 直接删除相关关键字记录
+        // $state = Teacher::destroy(3);
+        // var_dump($state);
+        // return '删除成功';
+        if($count = Teacher::destroy(6))
+        {
+        	return '成功删除' . $count . '条数据';
+        }
+        	return '删除失败';
+    }
 }
