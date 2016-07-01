@@ -162,24 +162,53 @@ class TeacherController extends Controller
 
     public function update()
     {
-    	//var_dump(input('post.'));
-    	// 接收数据
-    	$teacher = input('post.');
-        // 将数据存入Teacher表
-        $Teacher = new Teacher();
-        $message = '更新成功!';
+    	// //var_dump(input('post.'));
+    	// // 接收数据
+    	// $teacher = input('post.');
+     //    // 将数据存入Teacher表
+     //    $Teacher = new Teacher();
+     //    $message = '更新成功!';
        
-        // 依据状态定制提示信息
+     //    // 依据状态定制提示信息
+     //    try
+     //    {
+     //    	if(false === $Teacher->validate(true)->isUpdate(true)->save($teacher))
+     //    	{
+     //    		return $message='更新失败!' .  $Teacher->getError();
+     //    	}
+     //    }catch (\Exception $e)
+     //    {
+     //    	$message='更新失败!'  .  $e->getError();
+     //    }
+     //    return $message;
+
         try
         {
-        	if(false === $Teacher->validate(true)->isUpdate(true)->save($teacher))
-        	{
-        		return $message='更新失败!' .  $Teacher->getError();
-        	}
-        }catch (\Exception $e)
+            // 接收数据，取要更新的关键字信息
+            $id = input('post.id');
+
+            // 获取当前对象
+            $teacher = Teacher::get($id);
+
+            // 写入要更新的数据
+            $teacher->name = input('post.name');
+            $teacher->username = input('post.username');
+            $teacher->sex = input('post.sex');
+            $teacher->email = input('post.email');
+
+            // 更新
+            $message = '更新成功';
+            if (false === $teacher->validate(true)->save())
+            {
+                $message = '更新失败' . $teacher->getError();
+            }
+
+        } catch (\Exception $e)
         {
-        	$message='更新失败!'  .  $e->getError();
+            // 处理异常需要查看具体的异常位置及信息，故抛弃语句 throw $e;
+            $message = $e->getMessage();
         }
+
         return $message;
     }
 
