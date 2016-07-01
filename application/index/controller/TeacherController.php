@@ -160,4 +160,27 @@ class TeacherController extends Controller
         return $htmls;
     }
 
+    public function update()
+    {
+    	//var_dump(input('post.'));
+    	// 接收数据
+    	$teacher = input('post.');
+        // 将数据存入Teacher表
+        $Teacher = new Teacher();
+        $message = '更新成功!';
+       
+        // 依据状态定制提示信息
+        try
+        {
+        	if(false === $Teacher->validate(true)->isUpdate(true)->save($teacher))
+        	{
+        		return $message='更新失败!' .  $Teacher->getError();
+        	}
+        }catch (\Exception $e)
+        {
+        	$message='更新失败!'  .  $e->getError();
+        }
+        return $message;
+    }
+
 }
