@@ -97,9 +97,12 @@ class TeacherController extends Controller
     public function add()
     {
         //return 'hello add'; 测试此方法
-        //获取V层数据
-        $htmls = $this->fetch();//取回V层数据
-        return $htmls;//返回给用户
+        try {
+            $htmls = $this->fetch();//获取V层数据
+            return $htmls;//返回给用户
+        } catch (\Exception $e) {
+            return '系统错误' . $e->getMessage();
+        }
     }
 
     //测试方法
