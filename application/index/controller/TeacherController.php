@@ -52,24 +52,36 @@ class TeacherController extends Controller
 	 */
 	public function insert()
     {
-        //接收传入数据
-        $teacher = input('post.');
-       // $teacher['create_time'] = time();   // 加入时间戳
-        //var_dump($teacher);
-        //引用teacher模型
-        $Teacher = new teacher;
-        //var_dump($Teacher);
+        $message    = '';   // 反馈消息
+        $error      = '';   // 反馈错误信息
+        try{
+            //接收传入数据
+            //$teacher = input('post.');
+            //引用teacher模型
+            $teacher            = new Teacher;
+            $teacher->name      = input('post.name');
+            $teacher->username  = input('post.username');
+            $teacher->sex       = input('post.sex');
+            $teacher->email     = input('post.email');
 
-        //加入验证信息
-        $result = $Teacher->validate(true)->data($teacher)->save();
-
-        //反馈结果
-        if (false === $result) {
-        	return '新增失败'. $Teacher->getError();
-        } else{
-        	return $teacher['name'].'添加成功';
+            //加入验证信息
+            if (false ===  $teacher->validate(true)->save()) {
+                $error =  '新增失败'. $teacher->getError();
+            } else{
+                $message = $teacher['name'].'添加成功';
+            }
+        }catch (\Exception $e)
+        {
+            $error = '系统错误:' . $e->getMessage();
         }
-       
+        //判断是否发生错误，返回不同信息
+        if ($error === '')
+            {
+                return $this->success($message, url('index'));
+            } else {
+                return $this->error($error);
+            }
+    
         // var_dump($_POST);//与form中的method对应  $_GET同样是
         // $postData = input('post.');//使用助手函数input
         // var_dump($postData);
@@ -137,7 +149,7 @@ class TeacherController extends Controller
         
         // 直接删除相关关键字记录
        
-        if($count = Teacher::destroy(6))
+        if($count = Teacher::destroy($id))
         {
         	$message =  '成功删除' . $count . '条数据';
         }else
