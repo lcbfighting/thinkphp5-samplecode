@@ -12,8 +12,9 @@ class TeacherController extends Controller
 	{
 		
         try{
-            $Teacher = new Teacher;
-		    $teachers = $Teacher -> select();
+        	$pageSize = 5; //设置页码
+            $Teacher  = new Teacher;
+		    $teachers = $Teacher ->paginate($pageSize);
 		
 		    // 向V层传数据
 		    $this->assign('teachers', $teachers);
