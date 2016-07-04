@@ -174,22 +174,26 @@ class TeacherController extends Controller
     //编辑方法
     public function edit()
     {
-        // 获取传入ID
-        $id = input('get.id/d');
-        // 在Teacher表模型中获取当前记录
-        if(false === $teacher = Teacher::get($id))
-        {
-        	return '系统未找到id为'.$id.'的记录';
+        try{
+        	// 获取传入ID
+	        $id = input('get.id/d');
+	        // 在Teacher表模型中获取当前记录
+	        if(false === $teacher = Teacher::get($id))
+	        {
+	        	return '系统未找到id为'.$id.'的记录';
+	        }
+
+	        // 将数据传给V层
+	    	$this -> assign('teacher',$teacher);
+
+	    	// 获取封装好的V层内容
+	        $htmls = $this -> fetch();
+
+	        // 将封装好的V层内容返回给用户
+	        return $htmls;
+        }catch(\Exception $e){
+        	return '系统错误'. $e->getMessage();	
         }
-
-        // 将数据传给V层
-    	$this -> assign('teacher',$teacher);
-
-    	// 获取封装好的V层内容
-        $htmls = $this -> fetch();
-
-        // 将封装好的V层内容返回给用户
-        return $htmls;
     }
 
     public function update()
@@ -213,7 +217,8 @@ class TeacherController extends Controller
      //    	$message='更新失败!'  .  $e->getError();
      //    }
      //    return $message;
-
+    	$message = ''; //反馈消息
+    	$error   = ''; //反馈错误信息
         try
         {
             // 接收数据，取要更新的关键字信息
@@ -232,16 +237,21 @@ class TeacherController extends Controller
             $message = '更新成功';
             if (false === $teacher->validate(true)->save())
             {
-                $message = '更新失败' . $teacher->getError();
+                $error = '更新失败！' . $teacher->getError();
             }
 
         } catch (\Exception $e)
         {
             // 处理异常需要查看具体的异常位置及信息，故抛弃语句 throw $e;
-            $message = $e->getMessage();
+            $error = '系统错误' . $e->getMessage();
         }
-
-        return $message;
+        if($error === '')
+        {
+        	return $this->success($message,url('index'));
+        }else
+        {
+        	return $this->error($error);
+        }
     }
 
 }
