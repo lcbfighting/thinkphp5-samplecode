@@ -121,12 +121,21 @@ class TeacherController extends Controller
     //测试方法
     public function test()
     {
-        $data = array();
-        $data['username'] = 'ceshi';
-        $data['name'] = '1';
-        $data['sex'] = '1';
-        $data['email'] = 'hello';
-        var_dump($this->validate($data, 'Teacher'));
+        $pageSize = 5;//每页显示5条数据
+        $Teacher  = new Teacher();
+
+        //调用分页
+        $teachers = $Teacher->paginate($pageSize);
+
+        //不调用分页
+        $teachers = $Teacher->select();
+        var_dump($teachers);
+        // $data = array();
+        // $data['username'] = 'ceshi';
+        // $data['name'] = '1';
+        // $data['sex'] = '1';
+        // $data['email'] = 'hello';
+        // var_dump($this->validate($data, 'Teacher'));
     }
 
     //删除方法

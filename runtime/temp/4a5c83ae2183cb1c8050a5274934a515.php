@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:88:"D:\xampp\htdocs\thinkphp5-samplecode\public/../application/index\view\teacher\index.html";i:1467622094;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:88:"D:\xampp\htdocs\thinkphp5-samplecode\public/../application/index\view\teacher\index.html";i:1467623766;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,6 +35,7 @@
 			</tr>
 			<?php endforeach; endif; else: echo "" ;endif; ?>
 		    </table>
+		    当前页面的条数为<?php echo $teachers->count(); ?>
 		    <?php echo $teachers->render(); ?>
         </div>
     </div>
