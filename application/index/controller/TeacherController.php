@@ -131,34 +131,44 @@ class TeacherController extends Controller
     //删除方法
     public function delete()
     {
+        $message = ''; //返回信息
+        $error   = ''; //错误信息
         //接收ID，并转换为int型
-        $id = input('get.id/d');
-        //var_dump(input('get.'));
-        //引入教师表模型
-        // $Teacher = new Teacher;
-        // //获取当前记录
-        // if (false !== $teacher = $Teacher::get(8))
-        // {
-        //     // 删除当前ID的记录
-        //     if ($state = $teacher->delete())
-        //     {
-        //         return '删除成功';
-        //     }
-        // }
-        // return '删除失败';
-        
-        // 直接删除相关关键字记录
-       
-        if($count = Teacher::destroy($id))
-        {
-        	$message =  '成功删除' . $count . '条数据';
-        }else
-        {
-        	$message =  '删除失败';
+        try{
+        	$id = input('get.id/d');
+	        //var_dump(input('get.'));
+	        //引入教师表模型
+	        // $Teacher = new Teacher;
+	        // //获取当前记录
+	        // if (false !== $teacher = $Teacher::get(8))
+	        // {
+	        //     // 删除当前ID的记录
+	        //     if ($state = $teacher->delete())
+	        //     {
+	        //         return '删除成功';
+	        //     }
+	        // }
+	        // return '删除失败';
+	        
+	        // 直接删除相关关键字记录
+	       
+	        if($count = Teacher::destroy($id))
+	        {
+	        	$message =  '成功删除' . $count . '条数据';
+	        }else
+	        {
+	        	$message =  '删除失败';
+	        }
+        }catch(\Exception $e){
+        	$error = '系统错误' . $e->getMessage();
         }
-
-        //进行跳转
-        return $this->success($message, url('index'));
+        
+        if($error === '')
+        {
+        	//进行跳转
+       	 	return $this->success($message, url('index'));
+        }else
+      		return $this->error($error);  
     }
 
     //编辑方法
