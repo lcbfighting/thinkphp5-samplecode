@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:86:"D:\xampp\htdocs\thinkphp5-samplecode\public/../application/index\view\teacher\add.html";i:1466497970;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:86:"D:\xampp\htdocs\thinkphp5-samplecode\public/../application/index\view\teacher\add.html";i:1467597706;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +7,7 @@
 <body class="container">
     <div class="row">
         <div class="col-md-12">
-            <form action="insert" method="post">
+            <form action="<?php echo url('insert'); ?>" method="post">
                 <label>姓名：</label>
                 <input type="text" name="name" /> 
                 <label>性别：</label>
@@ -18,7 +18,7 @@
                 <label>用户名：</label>
                 <input type="text" name="username" />
                 <label>邮箱：</label>
-                <input type="text" name="email" />
+                <input type="email" name="email" />
                 <button type="submit">保存</button>
             </form>
         </div>
