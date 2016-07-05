@@ -12,16 +12,20 @@ class TeacherController extends Controller
 	{
 		
         try{
-        	$pageSize = 5; //设置页码
+        	// 获取当前页
+        	$page = input('get.page/d')< 1 ? 1 : input('get.page/d');
+            // 设置每页大小
+            $pageSize = 5;
+            // 获取偏移量offset
+            $offset = ($page - 1) * $pageSize;
+        	//$pageSize = 5; //设置页码
             $Teacher  = new Teacher;
-		    $teachers = $Teacher ->paginate($pageSize);
-		
+		    //$teachers = $Teacher ->paginate($pageSize);
+			$teachers = $Teacher->Limit($offset,$pageSize)->select();
 		    // 向V层传数据
 		    $this->assign('teachers', $teachers);
-       
             // 取回打包后的数据
             $htmls = $this->fetch();
-
             // 将数据返回给用户
             return $htmls;
         }catch(\Exception $e) {
@@ -33,16 +37,14 @@ class TeacherController extends Controller
 		// var_dump($teachers);
 		// 获取第0个数据
 		// $teacher = $teachers[0];
-
 		// // 调用上述对象的getData()方法
-  //       var_dump($teacher -> getData());
+  		// var_dump($teacher -> getData());
 		// echo $teacher -> getData('name');
 		// var_dump($teacher -> getData('name'));
 		// return $teacher -> getData('name');
 		// return 'hello teacher';//测试类及方法的正确性
 		//获取教师表中所有数据
 		// $teachers = Db::name('teacher')->select();
-
 		// //显示表中所有数据
 		// dump ($teachers);
 	}
