@@ -12,16 +12,19 @@ class TeacherController extends Controller
 	{
 		
         try{
+        	//获取查询信息
+        	$name = input('get.name');
+        	echo $name;
         	// 获取当前页
-        	$page = input('get.page/d')< 1 ? 1 : input('get.page/d');
+        	//$page = input('get.page/d')< 1 ? 1 : input('get.page/d');
             // 设置每页大小
             $pageSize = 5;
             // 获取偏移量offset
-            $offset = ($page - 1) * $pageSize;
+            //$offset = ($page - 1) * $pageSize;
         	//$pageSize = 5; //设置页码
             $Teacher  = new Teacher;
-		    //$teachers = $Teacher ->paginate($pageSize);
-			$teachers = $Teacher->Limit($offset,$pageSize)->select();
+		    $teachers = $Teacher->where('name', 'like', '%' . $name . '%')->paginate($pageSize);
+			//$teachers = $Teacher->Limit($offset,$pageSize)->select();
 		    // 向V层传数据
 		    $this->assign('teachers', $teachers);
             // 取回打包后的数据

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:88:"D:\xampp\htdocs\thinkphp5-samplecode\public/../application/index\view\teacher\index.html";i:1467707183;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:88:"D:\xampp\htdocs\thinkphp5-samplecode\public/../application/index\view\teacher\index.html";i:1467710557;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +10,20 @@
     <div class="row">
         <div class="col-md-12">
          	<hr />
+         	<div class="row">
+	         	<div class="col-md-8">
+	                    <form class="form-inline" action="<?php echo url(); ?>">
+	                        <div class="form-group">
+	                            <label class="sr-only" for="name">姓名</label>
+	                            <input name="name" type="text" class="form-control" placeholder="姓名...">
+	                        </div>
+	                        <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
+	                    </form>
+	            </div>
+	            <div class="col-md-4 text-right">
             	<a href="<?php echo url('add'); ?>" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>&nbsp;增加</a>
+            	</div>
+            </div>
             <hr />
             <table class="table table-hover table-bordered">
 			<tr class="info">
