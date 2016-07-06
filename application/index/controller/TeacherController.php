@@ -14,7 +14,7 @@ class TeacherController extends Controller
         try{
         	//获取查询信息
         	$name = input('get.name');
-        	echo $name;
+        	//echo $name;
         	// 获取当前页
         	//$page = input('get.page/d')< 1 ? 1 : input('get.page/d');
             // 设置每页大小

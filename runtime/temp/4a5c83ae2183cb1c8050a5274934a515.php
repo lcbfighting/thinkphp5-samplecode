@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:88:"D:\xampp\htdocs\thinkphp5-samplecode\public/../application/index\view\teacher\index.html";i:1467710557;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:88:"D:\xampp\htdocs\thinkphp5-samplecode\public/../application/index\view\teacher\index.html";i:1467789258;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,10 +12,10 @@
          	<hr />
          	<div class="row">
 	         	<div class="col-md-8">
-	                    <form class="form-inline" action="<?php echo url(); ?>">
+	                    <form class="form-inline" action="<?php echo url('' , input('get.')); ?>" >
 	                        <div class="form-group">
 	                            <label class="sr-only" for="name">姓名</label>
-	                            <input name="name" type="text" class="form-control" placeholder="姓名...">
+	                            <input name="name" type="text" class="form-control" placeholder="姓名..." value=<?php echo input('get.name'); ?>>
 	                        </div>
 	                        <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
 	                    </form>
@@ -42,29 +42,13 @@
 				<td><?php echo $teacher->getData("username"); ?></td>
 				<td><?php echo $teacher->getData("email"); ?></td>
 				<td>
-					<a href="<?php echo url('edit?id=' . $teacher->getData('id')); ?>">编辑</a>&nbsp;&nbsp;
-					<a href="<?php echo url('delete?id=' . $teacher->getData('id')); ?>">删除</a>
+					<a href="<?php echo url('edit?id=' . $teacher->getData('id')); ?>"><button type="button" class="btn btn-primary">编辑</button></a>&nbsp;&nbsp;
+					<a href="<?php echo url('delete?id=' . $teacher->getData('id')); ?>" class="btn btn-danger" role="button" >删除</a>
 				</td>
 			</tr>
 			<?php endforeach; endif; else: echo "" ;endif; ?>
 		    </table>
-		    <nav>
-                <ul class="pagination">
-                    <li>
-                        <a href="<?php echo url('?page=1'); ?>" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li><a href="<?php echo url('?page=1'); ?>">1</a></li>
-                    <li><a href="<?php echo url('?page=2'); ?>">2</a></li>
-                    <li><a href="<?php echo url('?page=3'); ?>">3</a></li>
-                    <li>
-                        <a href="<?php echo url('?page=3'); ?>" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+		    <?php echo $teachers->render(); ?>
         </div>
     </div>
 </body>
