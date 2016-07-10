@@ -1,6 +1,7 @@
 <?php
 namespace app\index\controller;
 use think\Controller;
+use app\model\Teacher;
 
 class LoginController extends Controller
 {
@@ -13,10 +14,29 @@ class LoginController extends Controller
 	//用户提交的登录数据
 	public function login()
 	{
-		return 'login';
+		//var_dump(input('post.'));
+		//return 'login';
 		//验证用户名是否存在
-		//验证密码是否正确
-		//用户名密码正确，将teacherId存session
-		//用户名密码错误，返回登录页面
+		// $map = array('username'=>input('post.usename'));
+		// $Teacher = Teacher::get($map);
+		// var_dump($Teacher);
+		// if(false !== $Teacher && $Teacher->getData('password') === input('post.password'))
+		// {
+		// 	//验证密码是否正确
+		// 	//用户名密码正确，将teacherId存session
+		// 	session('teacherId', $Teacher->getData('id'));
+  //           return $this->success('login success', url('Teacher/index'));
+		// }else
+		// {
+		// 	//用户名密码错误
+		// 	return $this->error('username or password incrrect',url('index'));
+		// }
+		// 直接调用M层方法，进行登录。
+        if (Teacher::login(input('post.username'), input('post.password')))
+        {
+            return $this->success('login success', url('Teacher/index'));
+        } else {
+            return $this->error('username or password incorrent', url('index'));
+        }
 	}
 }
