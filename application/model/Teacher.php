@@ -12,7 +12,7 @@ class Teacher extends Model
      * @param  string $password 密码
      * @return bool    成功返回true，失败返回false。
      */
-    static public function login($username, $password)
+    static public function logIn($username, $password)
     {
         // 验证用户是否存在
         $map = array('username'=>$username);
@@ -44,5 +44,17 @@ class Teacher extends Model
         } else {
             return false;
         }
+    }
+
+    /**
+     * 用户注销
+     * @return bool  [成功true 失败false]
+     * @author 
+     */
+    static public function logOut()
+    {
+        // 销毁session中数据
+        session('teacherId', null);
+        return true;
     }
 }

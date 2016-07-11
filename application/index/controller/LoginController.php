@@ -12,7 +12,7 @@ class LoginController extends Controller
 		return $this->fetch();
 	}
 	//用户提交的登录数据
-	public function login()
+	public function logIn()
 	{
 		//var_dump(input('post.'));
 		//return 'login';
@@ -25,18 +25,30 @@ class LoginController extends Controller
 		// 	//验证密码是否正确
 		// 	//用户名密码正确，将teacherId存session
 		// 	session('teacherId', $Teacher->getData('id'));
-  //           return $this->success('login success', url('Teacher/index'));
+  		//return $this->success('login success', url('Teacher/index'));
 		// }else
 		// {
 		// 	//用户名密码错误
 		// 	return $this->error('username or password incrrect',url('index'));
 		// }
 		// 直接调用M层方法，进行登录。
-        if (Teacher::login(input('post.username'), input('post.password')))
+        if (Teacher::logIn(input('post.username'), input('post.password')))
         {
             return $this->success('login success', url('Teacher/index'));
         } else {
             return $this->error('username or password incorrent', url('index'));
         }
+	}
+
+	//用户注销
+	public function logOut()
+	{
+		if(teacher::logOut())
+		{
+			return $this->success('logout success!',url('index'));
+		}else
+		{
+			return $this->error('logout error!',url('index'));
+		}
 	}
 }
