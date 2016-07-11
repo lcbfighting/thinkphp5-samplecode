@@ -10,33 +10,30 @@ class TeacherController extends Controller
 {
 	public function index()
 	{
-		
-        try{
-        	//获取查询信息
-        	$name = input('get.name');
-        	//echo $name;
-        	// 获取当前页
-        	//$page = input('get.page/d')< 1 ? 1 : input('get.page/d');
-            // 设置每页大小
-            $pageSize = 5;
-            // 获取偏移量offset
-            //$offset = ($page - 1) * $pageSize;
-        	//$pageSize = 5; //设置页码
-            $Teacher  = new Teacher;
-		    $teachers = $Teacher->where('name', 'like', '%' . $name . '%')->paginate($pageSize);
-			//$teachers = $Teacher->Limit($offset,$pageSize)->select();
-		    // 向V层传数据
-		    $this->assign('teachers', $teachers);
-            // 取回打包后的数据
-            $htmls = $this->fetch();
-            // 将数据返回给用户
-            return $htmls;
-        }catch(\Exception $e) {
-            // 处理异常后，如果需要返回异常的位置及信息，下行代码的注释要去掉。
-            //throw $e;
-            return '系统错误' . $e->getMessage();
+    	//验证用户是否登录
+        $teacherId = session('teacherId');
+        if ($teacherId === null) {
+            return $this->error('plz login first',url('Login/index'));
         }
-
+        //获取查询信息
+    	$name = input('get.name');
+    	//echo $name;
+    	// 获取当前页
+    	//$page = input('get.page/d')< 1 ? 1 : input('get.page/d');
+        // 设置每页大小
+        $pageSize = 5;
+        // 获取偏移量offset
+        //$offset = ($page - 1) * $pageSize;
+    	//$pageSize = 5; //设置页码
+        $Teacher  = new Teacher;
+	    $teachers = $Teacher->where('name', 'like', '%' . $name . '%')->paginate($pageSize);
+		//$teachers = $Teacher->Limit($offset,$pageSize)->select();
+	    // 向V层传数据
+	    $this->assign('teachers', $teachers);
+        // 取回打包后的数据
+        $htmls = $this->fetch();
+        // 将数据返回给用户
+        return $htmls;
 		// var_dump($teachers);
 		// 获取第0个数据
 		// $teacher = $teachers[0];
