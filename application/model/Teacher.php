@@ -59,8 +59,8 @@ class Teacher extends Model
     }
     /**
      * 判断用户是否已登录
-     * @return boolean 已登录true
-     * @author  panjie <panjie@yunzhiclub.com>
+     * @return boolean 已登录true 未登录false
+     * @author  
      */
     static public function isLogin()
     {
