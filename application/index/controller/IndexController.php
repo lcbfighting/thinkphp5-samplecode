@@ -1,6 +1,6 @@
 <?php
 namespace app\index\controller;
-use  think\Controller; //引用数据库操作类
+use think\Controller;
 use  app\model\Teacher;//教师模型
 
 class IndexController extends Controller

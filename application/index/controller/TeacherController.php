@@ -6,7 +6,7 @@ use app\model\Teacher; //teacher表
 /**
  * 教师管理
  */
-class TeacherController extends InedxController
+class TeacherController extends IndexController
 {
 	
     public function index()
