@@ -69,4 +69,24 @@ class KlassController extends IndexController
     		$this->success('操作成功！',url('index'));
     	}
     }
+
+    public function delete()
+    {
+    	$id = input('get.id/d');
+    	// 获取要删除的对象
+        $Klass = Klass::get($id);
+        if (false === $Klass)
+        {
+            return $this->error('不存在id为' . $id . '的班级，删除失败');
+        }
+
+        // 删除获取到的对象
+        if (false === $Klass->delete())
+        {
+            return $this->error('删除失败:' . $Klass->getError());
+        }
+
+        // 进行跳转
+        return $this->success('删除成功!', url('index'));
+    }
 }
