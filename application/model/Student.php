@@ -41,5 +41,13 @@ class Student extends Model
     public function getCreateTimeAttr($value)
     {
     	return date('Y-m-d',$value);
+    }
+
+     /**
+     * 之所以能调用到这个函数，是由一个__get()的魔法函数来完成的。
+    */
+    public function Klass()
+    {
+        return $this->belongsTo('Klass');
     }	
 }
