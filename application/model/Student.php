@@ -9,6 +9,8 @@ use think\Model;
 */
 class Student extends Model
 {
+	protected $dateFormat = 'Y年m月d日';//日期格式
+	//类型转换
 	protected $type = [
         'create_time' => 'datetime',
     ];
@@ -29,4 +31,15 @@ class Student extends Model
             return $status[0];
         }
     }
+
+    /**
+    *获取创建时间
+    *@param int $value
+    *@return string
+    *@author 
+    */	
+    public function getCreateTimeAttr($value)
+    {
+    	return date('Y-m-d',$value);
+    }	
 }

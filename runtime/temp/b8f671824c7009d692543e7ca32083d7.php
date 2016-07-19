@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:88:"D:\xampp\htdocs\thinkphp5-samplecode\public/../application/index\view\student\index.html";i:1468887465;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:88:"D:\xampp\htdocs\thinkphp5-samplecode\public/../application/index\view\student\index.html";i:1468889168;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -44,7 +44,7 @@
                     <td><?php echo $student->getData('num'); ?></td>
                     <td><?php echo $student->sex; ?></td>
                     <td><?php echo $student->getData('email'); ?></td>
-                    <td><?php echo $student->getData('create_time'); ?></td>
+                    <td><?php echo $student->create_time; ?></td>
                     <td><?php echo $student->getData('klass_id'); ?></td>
                     <td></td>
                     <td><a class="btn btn-danger btn-sm" href="<?php echo url('delete?id=' . $student->getData('id')); ?>"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>&nbsp;<a class="btn btn-sm btn-primary" href="<?php echo url('edit?id=' . $student->getData('id')); ?>"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a></td>

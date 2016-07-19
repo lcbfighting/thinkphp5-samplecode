@@ -10,4 +10,5 @@ class StudentController extends IndexController
         $this->assign('students', $students);
         return $this->fetch();
 	}
+
 }
