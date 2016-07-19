@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:88:"D:\xampp\htdocs\thinkphp5-samplecode\public/../application/index\view\student\index.html";i:1468811542;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:88:"D:\xampp\htdocs\thinkphp5-samplecode\public/../application/index\view\student\index.html";i:1468887465;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -42,7 +42,7 @@
                     <td><?php echo $key; ?></td>
                     <td><?php echo $student->getData('name'); ?></td>
                     <td><?php echo $student->getData('num'); ?></td>
-                    <td><?php echo $student->getData('sex'); ?></td>
+                    <td><?php echo $student->sex; ?></td>
                     <td><?php echo $student->getData('email'); ?></td>
                     <td><?php echo $student->getData('create_time'); ?></td>
                     <td><?php echo $student->getData('klass_id'); ?></td>
