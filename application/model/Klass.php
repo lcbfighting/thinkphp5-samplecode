@@ -13,10 +13,11 @@ class Klass extends Model
      * @return Teacher 教师
      * @author 
 	 */
-	public function getTeacher()
-	    {
-	        $teacherId = $this->getData('teacher_id');
-	        $Teacher = Teacher::get($teacherId);
-	        return $Teacher;
-	    }
+	public function Teacher()
+	{
+        // $teacherId = $this->getData('teacher_id');
+        // $Teacher = Teacher::get($teacherId);
+        // return $Teacher;
+        return $this->belongsTo('Teacher');
+	}
 }
