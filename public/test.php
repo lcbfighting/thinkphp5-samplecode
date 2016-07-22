@@ -24,18 +24,25 @@ class Test
     //     var_dump($args);
     //     $this->functionNotExist($args);
     // }
-    public function __construct()
+    // public function __construct()
+    // {
+    //     echo "construct";
+    // }
+    // public function sayHello()
+    // {
+    //     echo "sayHello";
+    // }
+    private $hi = 'hi';
+    public function __get($name)
     {
-        echo "construct";
-    }
-    public function sayHello()
-    {
-        echo "sayHello";
+        echo $name.'<br />';
+        echo $this->hi;
     }
 }
 $Test = new Test();
+echo $Test->hi;
 // 在这下面，我们开始写测试代码。
-echo "<br \>";
-$Test->sayHello();
+// echo "<br \>";
+// $Test->sayHello();
 // $Test->sayOther('hello yunzhi');
 // $Test->ssd('hi Yunzhier, how a u');
