@@ -10,7 +10,13 @@ class CourseController extends IndexController
 {
     public function index()
     {
-        return $this->fetch();
+        //获取课程信息
+        $name = input('get.name');
+        $pageSize = 5;
+        $Course = new Course();
+        $courses = $Course->where('name', 'like', '%' . $name . '%')->paginate($pageSize);
+        $this->assign('Course', $Course);//传入数据到V层
+        return $this->fetch();//取回数据
     }
 
     public function add()
@@ -63,5 +69,17 @@ class CourseController extends IndexController
         // }
 
         return $this->success('操作成功', url('index'));
+    }
+
+    public function edit()
+    {
+        $id = input('get.id/d');
+        $Course = Course::get($id);
+        if(false === $Course)
+        {
+            return $this->error('未找到ID为' . $id . '的记录');
+        }
+        $this->assign('Course',$Course);
+        return $this->fetch();
     }
 }
